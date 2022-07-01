@@ -181,6 +181,7 @@ server.${node}=zk${node}.${domain}:2888:3888
     permissions: 0700
 
 runcmd:
+  - yum update -y
   - /run/create_zk_user.sh
   - /run/setup_volumes.sh
   - /run/install_zookeeper.sh
