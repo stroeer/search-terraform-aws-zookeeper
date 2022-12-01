@@ -35,7 +35,7 @@ write_files:
       USERKEY[tbaerwinkel]="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApEVyAVr6HyGEucMpnZn+l+QiWdfG2LnED6Yjg46DjIWQ8vDASybQpxQUp6mYa7md4LsQk8G7Lcavsi5XU0sonDKkhEhv6GH4+qyo4v14sLOlTSEDN63Bn33Ug6zz/WaND8YL3wUrfGkM6oBcy38Vo2JeNxHNbFNfaaNTlPdn7fDXnC0y3UQt/nGspQL0lYKpHs+WcDu1uxsc6qgC9XPeJAm2cQ9q/PXgZ/Ze14lW58lUW14O06I9pJeq4gBIfQN85pLWfwCJCKrW2RkH1HgfQxF9XzYGNEmMfMFairANjsOb+28DzE8sqVq78cNNCRCTmiycWZf4yCT+rIR/hkSX8Q== Thomas Baerwinkel thomas.baerwinkel@quasiris.com Quasiris GmbH +49 172 3631388"
       USERKEY[jbajaryn]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEwvgsWuf828PFS3P9zn7/u1TXpdyNuxNc43SRDLtCU4dVXUmDYCW+2dn4L9DDFsIhwl22xpcevhwEE8ahEoEtkTq5ZFxaZrjNfnjyVVARBjcDV1bHtQjQvMv/k0sNstYmeuVKd8u6svGgv/K4Sbf5PDo2DyjuAVh5mLnXysTSPo9wLXvU3pBudBPlD1LDhrs7aTnkDoUo5FTS6O1rbmOKIeDd7E4CM9RdTAtGltQ5rZ9cPOAjTn3M+G/cgKsUorFZwfMtjlf08c1JoZOUmS9cwnvl58+uWXhYWhZCoHGHaJX7rxnJ2kTjwu0wBXCPpMDh2Cg/TG601zXFRdowvvPN jbn@quasiris.de"
 
-      for user in "${!USERKEY[@]}" ; do
+      for user in "$${!USERKEY[@]}" ; do
 
         adduser --disabled-password --gecos "" $user
 
@@ -44,7 +44,7 @@ write_files:
         echo "$user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/search-team
 
         mkdir /home/$user/.ssh
-        echo "${USERKEY[$user]}" >> /home/$user/.ssh/authorized_keys
+        echo "$${USERKEY[$user]}" >> /home/$user/.ssh/authorized_keys
 
         chown -R $user:$user /home/$user/.ssh
         chmod -R go-rx /home/$user/.ssh
