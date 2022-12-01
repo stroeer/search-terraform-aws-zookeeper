@@ -51,7 +51,7 @@ write_files:
       done
     owner: root:root
     path: /run/create-users.sh
-    permissions: 0644
+    permissions: 0700
   - content: |
       * * * * * root /usr/local/bin/instance_healthcheck.sh
 
