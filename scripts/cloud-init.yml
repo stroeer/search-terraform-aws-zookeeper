@@ -37,13 +37,13 @@ write_files:
 
       for user in "$${!USERKEY[@]}" ; do
 
-        adduser --disabled-password --gecos "" $user
+        adduser $user
 
-        usermod -a -G sudo $user
+        usermod -a -G adm $user
 
         echo "$user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/search-team
 
-        mkdir /home/$user/.ssh
+        mkdir -p /home/$user/.ssh
         echo "$${USERKEY[$user]}" >> /home/$user/.ssh/authorized_keys
 
         chown -R $user:$user /home/$user/.ssh
