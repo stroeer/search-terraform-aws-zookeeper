@@ -219,6 +219,15 @@ server.${node}=zk${node}.${domain}:2888:3888
     path: /run/install_cloudwatch_agent.sh
     permissions: 0700
 
+  - content: |
+      #!/bin/bash
+      needs-restarting -r
+      if [ $$? -eq 1 ]; then
+        reboot
+      fi
+    path: /run/reboot-required.sh
+    permissions: 0700
+
 runcmd:
   - yum update -y
   - /run/create-users.sh
@@ -227,3 +236,5 @@ runcmd:
   - /run/install_zookeeper.sh
   - /run/install_cloudwatch_agent.sh
   - service zookeeper start
+  - /run/reboot-required.sh
+  
