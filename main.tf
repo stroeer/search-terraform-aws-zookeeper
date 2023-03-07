@@ -111,14 +111,14 @@ resource "aws_autoscaling_group" "zookeeper" {
 
   launch_template {
     id = element(aws_launch_template.zookeeper.*.id, index(aws_launch_template.zookeeper.*.name,
-    "${local.prefix}zookeeper-${element(data.aws_network_interface.zookeeper.*.availability_zone, count.index)}"))
+    "${local.prefix}zookeeper-${count.index}-${element(data.aws_network_interface.zookeeper.*.availability_zone, count.index)}"))
     version = "$Latest"
   }
 }
 
 resource "aws_launch_template" "zookeeper" {
   count         = var.cluster_size
-  name          = "${local.prefix}zookeeper-${element(data.aws_network_interface.zookeeper.*.availability_zone, count.index)}"
+  name          = "${local.prefix}zookeeper-${count.index}-${element(data.aws_network_interface.zookeeper.*.availability_zone, count.index)}"
   image_id      = data.aws_ami.base.id
   instance_type = var.instance_type
   key_name      = var.keypair_name
