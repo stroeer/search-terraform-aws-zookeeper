@@ -33,7 +33,7 @@ variable "bastion_ingress_cidrs" {
 
 variable "zookeeper_version" {
   description = "The version of Zookeeper to install"
-  default     = "3.7.0"
+  default     = "3.8.1"
 }
 
 variable "tags" {
