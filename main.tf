@@ -326,7 +326,7 @@ resource "aws_instance" "bastion" {
 resource "aws_route53_record" "zookeeper" {
   count   = var.cluster_size
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "zk${count.index + 1}"
+  name    = "zk381-${count.index + 1}"
   type    = "A"
   ttl     = 60
   records = element(aws_network_interface.zookeeper.*.private_ips, count.index)

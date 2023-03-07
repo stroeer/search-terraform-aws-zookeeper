@@ -111,7 +111,7 @@ write_files:
       4lw.commands.whitelist=mntr, stat, ruok, conf, isro
       maxClientCnxns=600
       %{ for node in nodes ~}
-server.${node}=zk${node}.${domain}:2888:3888
+        server.${node}=zk381-${node}.${domain}:2888:3888
       %{ endfor ~}
 
     path: /run/zoo.cfg

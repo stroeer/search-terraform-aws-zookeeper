@@ -49,7 +49,7 @@ variable "name_prefix" {
 
 variable "cluster_size" {
   description = "The number of Zookeeper nodes to provision and keep in service. Must be an odd number"
-  default     = 3
+  default     = 5
 
   validation {
     condition     = var.cluster_size % 2 == 1
