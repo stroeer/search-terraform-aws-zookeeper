@@ -27,7 +27,7 @@ data "aws_ami" "base" {
 }
 
 data "aws_route53_zone" "zone" {
-  name = "${var.route53_zone}."
+  name         = "${var.route53_zone}."
   private_zone = var.route53_zone_is_private
 }
 
@@ -95,8 +95,8 @@ resource "aws_network_interface" "zookeeper" {
 }
 
 data "aws_network_interface" "zookeeper" {
-  count           = var.cluster_size
-  id = element(aws_network_interface.zookeeper.*.id, count.index)
+  count = var.cluster_size
+  id    = element(aws_network_interface.zookeeper.*.id, count.index)
 }
 
 resource "aws_autoscaling_group" "zookeeper" {
@@ -214,70 +214,70 @@ resource "aws_security_group" "zookeeper-external" {
   })
 }
 
-resource "aws_security_group_rule" "zookeeper1" {
-  type              = "ingress"
-  from_port         = 3888
-  to_port           = 3888
-  protocol          = "tcp"
-  security_group_id = aws_security_group.zookeeper-internal.id
-  self              = true
+resource "aws_vpc_security_group_ingress_rule" "zookeeper_3888" {
+  security_group_id            = aws_security_group.zookeeper-internal.id
+  referenced_security_group_id = aws_security_group.zookeeper-internal.id
+
+  from_port   = 3888
+  to_port     = 3888
+  ip_protocol = "tcp"
 }
 
-resource "aws_security_group_rule" "zookeeper2" {
-  type              = "ingress"
-  from_port         = 2888
-  to_port           = 2888
-  protocol          = "tcp"
-  security_group_id = aws_security_group.zookeeper-internal.id
-  self              = true
+resource "aws_vpc_security_group_ingress_rule" "zookeeper_2888" {
+  security_group_id            = aws_security_group.zookeeper-internal.id
+  referenced_security_group_id = aws_security_group.zookeeper-internal.id
+
+  from_port   = 2888
+  to_port     = 2888
+  ip_protocol = "tcp"
 }
 
-resource "aws_security_group_rule" "zookeeper-client-sg" {
-  count                    = var.client_security_group_id == "" ? 0 : 1
-  type                     = "ingress"
-  from_port                = var.zookeeper_config["clientPort"]
-  to_port                  = var.zookeeper_config["clientPort"]
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.zookeeper-external.id
-  source_security_group_id = var.client_security_group_id
+resource "aws_vpc_security_group_ingress_rule" "zookeeper-client-sg" {
+  count                        = var.client_security_group_id == "" ? 0 : 1
+  security_group_id            = aws_security_group.zookeeper-external.id
+  referenced_security_group_id = var.client_security_group_id
+
+  from_port   = var.zookeeper_config["clientPort"]
+  to_port     = var.zookeeper_config["clientPort"]
+  ip_protocol = "tcp"
 }
 
-resource "aws_security_group_rule" "zookeeper-client-cidr" {
-  count             = var.client_security_group_id == "" ? 1 : 0
-  type              = "ingress"
-  from_port         = var.zookeeper_config["clientPort"]
-  to_port           = var.zookeeper_config["clientPort"]
-  protocol          = "tcp"
+resource "aws_vpc_security_group_ingress_rule" "zookeeper-client-cidr" {
+  count             = var.client_security_group_id == "" ? 0 : 1
   security_group_id = aws_security_group.zookeeper-external.id
-  cidr_blocks       = [data.aws_vpc.vpc.cidr_block]
+
+  cidr_ipv4   = data.aws_vpc.vpc.cidr_block
+  from_port   = var.zookeeper_config["clientPort"]
+  to_port     = var.zookeeper_config["clientPort"]
+  ip_protocol = "tcp"
 }
 
-resource "aws_security_group_rule" "zookeeper-bastion" {
-  count                    = var.create_bastion == true ? 1 : 0
-  type                     = "ingress"
-  from_port                = 22
-  to_port                  = 22
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.zookeeper-external.id
-  source_security_group_id = aws_security_group.bastion[count.index].id
+resource "aws_vpc_security_group_ingress_rule" "zookeeper-bastion" {
+  count                        = var.create_bastion == true ? 1 : 0
+  security_group_id            = aws_security_group.zookeeper-external.id
+  referenced_security_group_id = aws_security_group.bastion[count.index].id
+
+  from_port   = 22
+  to_port     = 22
+  ip_protocol = "tcp"
 }
 
-resource "aws_security_group_rule" "zookeeper-internal-egress" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  security_group_id = aws_security_group.zookeeper-internal.id
-  cidr_blocks       = ["0.0.0.0/0"]
-}
-
-resource "aws_security_group_rule" "zookeeper-external-egress" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
+resource "aws_vpc_security_group_egress_rule" "zookeeper_external_egress_https_v4" {
   security_group_id = aws_security_group.zookeeper-external.id
-  cidr_blocks       = ["0.0.0.0/0"]
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 443
+  to_port     = 443
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_egress_rule" "zookeeper_external_egress_https_v6" {
+  security_group_id = aws_security_group.zookeeper-external.id
+
+  cidr_ipv6   = "::0/0"
+  from_port   = 443
+  to_port     = 443
+  ip_protocol = "tcp"
 }
 
 resource "aws_security_group" "bastion" {
