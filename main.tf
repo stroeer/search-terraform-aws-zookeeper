@@ -122,6 +122,9 @@ resource "aws_launch_template" "zookeeper" {
   image_id      = data.aws_ami.base.id
   instance_type = var.instance_type
   key_name      = var.keypair_name
+  metadata_options {
+    http_tokens = "required"
+  }
   user_data = base64encode(templatefile("${path.module}/scripts/cloud-init.yml", {
     version              = var.zookeeper_version
     nodes                = range(1, var.cluster_size + 1)
