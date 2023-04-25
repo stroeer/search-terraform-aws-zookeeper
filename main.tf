@@ -272,7 +272,7 @@ resource "aws_vpc_security_group_egress_rule" "zookeeper_internal_egress_2888" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "zookeeper_external_egress_3888" {
-  security_group_id            = aws_security_group.zookeeper-external.id
+  security_group_id            = aws_security_group.zookeeper-internal.id
   referenced_security_group_id = aws_security_group.zookeeper-internal.id
 
   from_port   = 3888
