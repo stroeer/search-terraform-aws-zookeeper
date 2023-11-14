@@ -221,6 +221,14 @@ write_files:
 
   - content: |
       #!/bin/bash
+      yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+      service amazon-ssm-agent enabled
+      service amazon-ssm-agent restart
+    path: /run/install-ssm-agent.sh
+    permissions: 0700
+
+  - content: |
+      #!/bin/bash
       needs-restarting -r
       if [ $$? -eq 1 ]; then
         reboot
@@ -236,5 +244,6 @@ runcmd:
   - /run/install_zookeeper.sh
   - /run/install_cloudwatch_agent.sh
   - service zookeeper start
+  - /run/install-ssm-agent.sh
   - /run/reboot-required.sh
   

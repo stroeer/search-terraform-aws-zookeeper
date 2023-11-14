@@ -88,6 +88,12 @@ resource "aws_iam_instance_profile" "zookeeper" {
   role = aws_iam_role.assume_role.name
 }
 
+# policy for ssh over ssm
+resource "aws_iam_role_policy_attachment" "ssh_over_ssm" {
+  role       = aws_iam_role.zookeeper.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_network_interface" "zookeeper" {
   count           = var.cluster_size
   subnet_id       = element(var.zookeeper_subnets, count.index)
