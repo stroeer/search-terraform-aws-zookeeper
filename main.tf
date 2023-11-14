@@ -90,7 +90,7 @@ resource "aws_iam_instance_profile" "zookeeper" {
 
 # policy for ssh over ssm
 resource "aws_iam_role_policy_attachment" "ssh_over_ssm" {
-  role       = aws_iam_role.zookeeper.id
+  role       = aws_iam_role.assume_role.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
