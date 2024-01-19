@@ -21,18 +21,17 @@ write_files:
 
       declare -A USERKEY
 
-      USERKEY[mgaber]="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+MHNau/qsTcepWOsEFxsj+mgSHTCxE4h4c4IGPU36u Michael Gaber Michael.Gaber@stroeer.de Stroeer Digital Publishing GmbH"
-      USERKEY[akunisch]="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAgHFJ/qJ4EnC9x4pa3reuHkYRxDhuAneK+15NhZeDfTVQHkBaT1hd4ermzpIycDR1Z5s1vNNcAA5bwxHjd2Rt5zVqchbnw9vzUxd9FfsW44MJYi95L2JkuQ60B7DuL4+pJtZqRuyhVRh9HlUhDDmEjKDEKH9pK1CLYkqWY49KJOZiA/6NLhSQO1qtkLJFd4yJf1k4TU7TtN0jbnyqtVPoOaUlkq49yAGIp6siG4ruTMZgRstsXJltnAl/jgfnbn9YOUr1HmeDQnCzHq2EsQwFE40sbtNe106+fwMuFhdL62zr5nf0xtPG8FPWrroAecGRTIoxAT3SHur2rtTd3q7oqw== Arne Kunisch arne.kunisch@stroeer.de Stroeer Digital Publishing GmbH"
-      USERKEY[ascholz]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFTjykbHZO4NxR4ysBEnB+T1BG8YsJN1JHSyS2eqy2bUQ2EFJVge0Zn/1bVaWgGXULtSo6xgEQ3HwOkrKpVWP8LnsIJeceqUiCtld16w0RtyMDd9Qdf94q1CKBnrMzbIDL5sEH1ghtkVl2oG0eqBbhIG+jOrflH7uyGX6MGRAYm1MVdU3LcfE/ofjYgUJCUHES90rccwRyjKLFhbwsCFZik10YrECYytN+XtfS4f2EmJ/+z4E1BkdWLAqfuP/MhtqG95SqcF7rNxe9QDcnkyA2Ap4xaxaZ8ppTpAjt4xYlFGXIIhkJdwV1RgiDnUvoksF1I4jA2MKPYC+2PX/fmM39 Anne Scholz anne.scholz@esemos.de ESEMOS GmbH +49 34197693600"
-      USERKEY[cstuemer]="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAjxZ6xzLqQgLHnJsapDz0IojUycTfA/hiZf+S8MzSfZlsIcj+k1KtfnQWgIx6rRZj2q3GeiVXRO4bzXUJ0CN552yLIQZtTixnQKE0UfEurqfb64wpEySS8FTrwXeraE0fhKorfsPKwptjQd5gW6JFTuEwYNNcxvjyON90bJZNMjl8EbklAvchs8d9gSmVx6M+XdrncZbAweCW0ZdQpQsL58p5CDMWBGqK0WOfROQKlcdEqyg+PG1cSUEHuDw/7VliqzDWOATTaCT6wiKIRrI/Dwi64+FRsSF7U6gBjJoozV8KB11HOj6Ls19XnA4HgPz+ajC5h3zcbmFSr5pigVR0bw== Chris Stuemer christ.stuemer@esemos.de ESEMOS GmbH"
-      USERKEY[dklug]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZP6GbC7YhluH+ruHMTaKCkThDJJGXZuAPzqdsby8U5o/w3VMPxZ2EDN7X2mZKu7k6rxy0DbDurUXK6QnGunKakqf4Us0swv2reX33jhZx6ju5rYT9NO9BUcDLQiQs8QvhutXj3jhjMJwPPboWRQt+OxIMfJzY3MZdG7zwStGzdIruM+flc2tE1a9O1XPStfKbtTxLEXBiO7lp+u49QRb9wzf0z5o6SoGe3QGNjmf7HHQF5qEqj3rcbfBjyEAmvqjBd0XJCVpOjRf79naYr/X/VnCpAxdRBlIcrB76RCSw2z4BsJ6cg6V4AAL9WIg0V0dfVzUzD8gDfs8X8fpwDfF+Go1ZmM52xCYt3Fwg0lwmjlnOYR0P41rRZyNdUvGKm/KmPa1+pJ1zHReSQYhIFITsBXJxryWvfuGGlFWBTVa78QZbDxtDN6UmiviqUbNNj2xDehHsmAgtda0RIhPtw0jNtqERZl+O4HWrIm57OVmd9X5gzbRrwi+cwVFXQ3KAkcOKGdDcPTCFdVIHAStoe4gaawD6DCQbSq6m38cDcw767FnDBKy1zTLaQsOQB4pqbkmuA9DJNs6K0p3LpOJc4855pOk9eZzXwllmKqR7ATGjPDVUdpKlgnakb9gK7lPrqGnZYPcPfP3A3hQRjOPkBbixQOKi54iUGQ+r9HyG39dz+w== Daniel Klug daniel.klug@esemos.de ESEMOS GmbH"
-      USERKEY[khoebold]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDA5/VpfGedNKyJiLPFpxXnDoslJ8rAp98Jo6o/CCQWmBmNtrhjZZ64wGGWce23kZJyTW8ITNPaV3uNuY+CqWqGVmemy64Dtf9zbij2+0yqsOcHmSLpIdZOC0LZgxAib1OQSoseMp5DAniWN+K/E1tbldQK6/QD/WiQmVFtAP3WBSukYDebnrMyPpNOAO+qtEeojVkbBNFdf+ay3l70l6tISWX+jATAM7Tl57ei4/6gtsLVeq9aBz0nxnpNR5L8s7iARSExkM/2pxlz3ZG95aaCHrdheYhntC6IHUXtee85XEa6CZH0EuLBoMUblZslBQzSSlxNxDm343J7iF+P3jr5tmZwZByiLPFMu759Qr40O6lYafVKZlVtkiBhVeR/r3KhQZhFeuUK1gCOXYpsuNDtoCHL51lity4+G1gC9G5EZzvHhw4IvuNcS3QoeBd3bflTbMf+vLN/sfPSbajw3YlAyMIUlGcaBk7US98OtcG7Eup0KkTC/Dz6XlDg7ANBz5tbGcLy+ydDYSVIvRrU3bYAIsjefFdv0hYrKbS1L+gHlKTJHCo1vAs+YvAtWg2pRNhsB7l5zcQwMEgraajl50it5XMsKj6W/CSafM+EcfEq0KffoY5DzxOe6fxMYnOQukSHQTcPVY8p0UpjZ0aKIgQR0MiCKgWl4ErAuoOtQVgh5Q== Kai Hoebold kai.hoebold@esemos.de"
-      USERKEY[ltischendorf]="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAke+GnVbjMKaG3bIvB+KsZq5Ikgqdven0c1xbXI6xXPRIAhlL8eYiBMW0JC/CY/U1kv+5CRO7nxy1fyGAyeNMz3XR8Ufzx8j1hfUle8wWix+Td3pI+aGDBtDLMCCKuRCsFmyxUU1SxMd9hU/lfJqkVDUTTg2/POG+cMGjWtIltTM= Lutz Tischendorf lutz.tischendorf@esemos.de Esemos GmbH"
-      USERKEY[prieger]="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAjJUBKFpUU35O+uzzqA2UoK6XYLpOI9UcstPR+r5paechzRYfFbfxmykwMibwSySzzyx3l/JVRM07rD2cbdEdJQXjykWYvEqrzIcmT7TSfYsniA0HVof+qUkvpsfM0SRncrVp01wYK50YWR7XSTiG9GrwnnZf7dBmI+RDqC7BjFc= Peter Rieger peter.rieger@esemos.de Esemos GmbH +49 173 1918195"
-      USERKEY[swindisch]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8OgKuqLt5quXy9UaJdD8SgGtnGQzTboejjRZlv9HCzqahb2v8G8A5oL8vUvxhnnNTagFCt6t3U8IYHFCQ0L3HroL9hG2fSPUSc2ZtZ/BZXA8OSY7T4/3F86fT4rLQylojzrk1JsfzhusrQTLxhkwAvmcb7UGzGQcIIpwhFccgClpj6oE/o5jPKtrhhYbW2AdGvchUbtFiEFphW1/iz/lga1CTg6/C+xpGrL01FRE3HrGYIXwqzmEOv7TV7c9pElEvn2WxLoTVJ2C9jL4Pe1lXDPtptJ/ctAUp6QiOT+hMtHfoj/476KHRJhzz9631T1G/kLdWPKioVS1uj21yX5aj  Sven Windisch sven.windisch@esemos.de Esemos GmbH +49 34203433014"
-      USERKEY[dgoldhan]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLHN/SWvoPeu5BM+AfrmdBkcfrF+4oVjsiUpAASji1MmYkXBm+h/+YeBYig0h0vid7IOPBGB73mPxvkkg8H4ItFVLVO3Vl4Z+Vh4S/9247ZOCdLiZZ480DUckc563qDZkzoMWUTpgDXNO9nC4f/Cy3MP8+OlwSp/rA+5IZ1fDp/ejfhrQEm6QokKy9Kek/6TxzjxrfTChHy1PlT0vZO0omZ+Cw2XJJsddqc3xBXDbEixduJ+32i0q1ZniXgpHsmiq2VSyJG94K66M99J1/YJ8rVAYwRk60nSpO1Bbgf5sGoegjtxY9MonDONT99lzwVduk4tUscrbyWT6cgp/eiEc5 Dirk Goldhan dirk.goldhan@quasiris.com Quasiris GmbH +49 177 2426266"
-      USERKEY[tbaerwinkel]="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApEVyAVr6HyGEucMpnZn+l+QiWdfG2LnED6Yjg46DjIWQ8vDASybQpxQUp6mYa7md4LsQk8G7Lcavsi5XU0sonDKkhEhv6GH4+qyo4v14sLOlTSEDN63Bn33Ug6zz/WaND8YL3wUrfGkM6oBcy38Vo2JeNxHNbFNfaaNTlPdn7fDXnC0y3UQt/nGspQL0lYKpHs+WcDu1uxsc6qgC9XPeJAm2cQ9q/PXgZ/Ze14lW58lUW14O06I9pJeq4gBIfQN85pLWfwCJCKrW2RkH1HgfQxF9XzYGNEmMfMFairANjsOb+28DzE8sqVq78cNNCRCTmiycWZf4yCT+rIR/hkSX8Q== Thomas Baerwinkel thomas.baerwinkel@quasiris.com Quasiris GmbH +49 172 3631388"
-      USERKEY[jbajaryn]="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEwvgsWuf828PFS3P9zn7/u1TXpdyNuxNc43SRDLtCU4dVXUmDYCW+2dn4L9DDFsIhwl22xpcevhwEE8ahEoEtkTq5ZFxaZrjNfnjyVVARBjcDV1bHtQjQvMv/k0sNstYmeuVKd8u6svGgv/K4Sbf5PDo2DyjuAVh5mLnXysTSPo9wLXvU3pBudBPlD1LDhrs7aTnkDoUo5FTS6O1rbmOKIeDd7E4CM9RdTAtGltQ5rZ9cPOAjTn3M+G/cgKsUorFZwfMtjlf08c1JoZOUmS9cwnvl58+uWXhYWhZCoHGHaJX7rxnJ2kTjwu0wBXCPpMDh2Cg/TG601zXFRdowvvPN jbn@quasiris.de"
+      USERKEY[mgaber]=""
+      USERKEY[ascholz]=""
+      USERKEY[cstuemer]=""
+      USERKEY[dklug]=""
+      USERKEY[khoebold]=""
+      USERKEY[ltischendorf]=""
+      USERKEY[prieger]=""
+      USERKEY[swindisch]=""
+      USERKEY[dgoldhan]=""
+      USERKEY[tbaerwinkel]=""
+      USERKEY[jbajaryn]=""
 
       for user in "$${!USERKEY[@]}" ; do
 
@@ -43,7 +42,6 @@ write_files:
         echo "$user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/search-team
 
         mkdir -p /home/$user/.ssh
-        echo "$${USERKEY[$user]}" >> /home/$user/.ssh/authorized_keys
 
         chown -R $user:$user /home/$user/.ssh
         chmod -R go-rx /home/$user/.ssh
