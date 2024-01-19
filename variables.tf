@@ -119,3 +119,7 @@ variable "cloudwatch_namespace" {
   description = "The namespace for Cloudwatch Metrics"
   default     = "CWAgent"
 }
+
+variable "subdomain" {
+  type = string
+}
