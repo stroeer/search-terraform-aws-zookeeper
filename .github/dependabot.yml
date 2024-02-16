@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - directory: /terraform
+    open-pull-requests-limit: 5
+    package-ecosystem: terraform
+    rebase-strategy: auto
+    assignees:
+      - DKlug1337
+      - semantosoph
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Berlin
+      time: 05:00
+
