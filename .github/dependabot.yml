@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - directory: /terraform
+  - directory: /
     open-pull-requests-limit: 5
     package-ecosystem: terraform
     rebase-strategy: auto
