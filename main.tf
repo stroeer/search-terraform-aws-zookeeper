@@ -135,6 +135,7 @@ resource "aws_launch_template" "zookeeper" {
     version              = var.zookeeper_version
     nodes                = range(1, var.cluster_size + 1)
     domain               = var.route53_zone
+    subdomain            = var.subdomain
     index                = count.index + 1
     zk_heap              = var.zookeeper_config["zkHeap"]
     client_port          = var.zookeeper_config["clientPort"]
