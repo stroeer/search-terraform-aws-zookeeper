@@ -20,7 +20,7 @@ data "aws_ami" "base" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+    values = ["al2023-ami-202*-kernel-*-x86_64"]
   }
 
   most_recent = true
