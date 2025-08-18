@@ -63,14 +63,19 @@ variable "instance_type" {
   default     = "m4.large"
 }
 
-variable "data_volume_type" {
-  description = "The EBS volume type for each Zookeeper node's data volume"
+variable "root_volume_type" {
+  description = "The EBS volume type for each Zookeeper node's root filesystem volume"
   default     = "gp2"
 }
 
 variable "root_volume_size" {
   description = "The size in GB of the Zookeeper node's root filesystem"
   default     = 32
+}
+
+variable "data_volume_type" {
+  description = "The EBS volume type for each Zookeeper node's data volume"
+  default     = "gp2"
 }
 
 variable "data_volume_size" {

@@ -150,6 +150,7 @@ resource "aws_launch_template" "zookeeper" {
 
     ebs {
       volume_size = var.root_volume_size
+      volume_type = var.root_volume_type
     }
   }
 
@@ -159,6 +160,7 @@ resource "aws_launch_template" "zookeeper" {
 
     ebs {
       volume_size = var.data_volume_size
+      volume_type = var.data_volume_type
     }
   }
 
@@ -168,6 +170,7 @@ resource "aws_launch_template" "zookeeper" {
 
     ebs {
       volume_size = var.log_volume_size
+      volume_type = var.log_volume_type
     }
   }
 
