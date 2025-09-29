@@ -94,6 +94,17 @@ resource "aws_iam_role_policy_attachment" "ssh_over_ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+# add this 2 resource blocks
+resource "aws_iam_role_policy_attachment" "inspector_readonly" {
+  role       = aws_iam_role.assume_role.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonInspector2ReadOnlyAccess"
+}
+
+resource "aws_iam_instance_profile" "ssm_inspector_profile" {
+  role = aws_iam_role.assume_role.id
+  name = "AmazonSSMInspectorInstanceProfile-zookeeper"
+}
+
 resource "aws_network_interface" "zookeeper" {
   count           = var.cluster_size
   subnet_id       = element(var.zookeeper_subnets, count.index)
