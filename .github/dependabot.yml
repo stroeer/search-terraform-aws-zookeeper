@@ -12,4 +12,22 @@ updates:
       day: "monday"
       timezone: "Europe/Berlin"
       time: "05:00"
+    cooldown:
+      default-days: 8
+    groups:
+      terraform-providers:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 8
+    groups:
+      github-actions:
+        patterns:
+          - "*"
 
