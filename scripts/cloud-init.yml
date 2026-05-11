@@ -9,8 +9,8 @@ packages:
   - nc
 
 mounts:
-  - [ xvdb, /zookeeper/data, "xfs", "defaults,noatime", "0", "0" ]
-  - [ xvdc, /zookeeper/logs, "xfs", "defaults,noatime", "0", "0" ]
+  - [xvdb, /zookeeper/data, "xfs", "defaults,noatime", "0", "0"]
+  - [xvdc, /zookeeper/logs, "xfs", "defaults,noatime", "0", "0"]
 
 write_files:
   - content: |
@@ -210,7 +210,7 @@ write_files:
   - content: |
       #!/bin/bash
       echo Installing CloudWatch agent
-      wget -O /run/amazon-cloudwatch-agent.rpm https://amazoncloudwatch-agent.s3.amazonaws.com/amazon_linux/arm64/latest/amazon-cloudwatch-agent.rpm
+      wget -O /run/amazon-cloudwatch-agent.rpm https://amazoncloudwatch-agent.s3.amazonaws.com/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
       rpm -Uvh /run/amazon-cloudwatch-agent.rpm
       chkconfig amazon-cloudwatch-agent on
       service amazon-cloudwatch-agent start
@@ -244,4 +244,3 @@ runcmd:
   - service zookeeper start
   - /run/install-ssm-agent.sh
   - /run/reboot-required.sh
-  
