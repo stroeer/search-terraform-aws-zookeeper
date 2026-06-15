@@ -102,7 +102,7 @@ resource "aws_iam_role_policy_attachment" "inspector_readonly" {
 
 resource "aws_iam_instance_profile" "ssm_inspector_profile" {
   role = aws_iam_role.assume_role.id
-  name = "AmazonSSMInspectorInstanceProfile-zookeeper"
+  name = "AmazonSSMInspectorInstanceProfile-zookeeper${var.zookeeper_version}"
 }
 
 resource "aws_network_interface" "zookeeper" {
