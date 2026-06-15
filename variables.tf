@@ -128,3 +128,8 @@ variable "cloudwatch_namespace" {
 variable "subdomain" {
   type = string
 }
+
+variable "enable_client_rule" {
+  type    = bool
+  default = false
+}

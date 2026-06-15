@@ -257,7 +257,7 @@ resource "aws_vpc_security_group_ingress_rule" "zookeeper_2888" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "zookeeper-client-sg" {
-  count                        = var.client_security_group_id == "" ? 0 : 1
+  count                        = var.enable_client_rule ? 1 : 0
   security_group_id            = aws_security_group.zookeeper-external.id
   referenced_security_group_id = var.client_security_group_id
 
@@ -267,7 +267,7 @@ resource "aws_vpc_security_group_ingress_rule" "zookeeper-client-sg" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "zookeeper-client-cidr" {
-  count             = var.client_security_group_id == "" ? 0 : 1
+  count             = var.enable_client_rule ? 1 : 0
   security_group_id = aws_security_group.zookeeper-external.id
 
   cidr_ipv4   = data.aws_vpc.vpc.cidr_block
