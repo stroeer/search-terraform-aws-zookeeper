@@ -139,10 +139,11 @@ write_files:
   - content: |
       {
         "log_file": "/zookeeper/logs/zookeeper-zookeeper*",
+        "log_file_mode": "latest",
         "log_group": "zookeeper.log",
         "log_stream": "",
-        "timestamp_layout": "Jan 02 15:04:05",
-        "timestamp_regex": "^(\\w{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2})",
+        "timestamp_layout": "2006-01-02 15:04:05,000",
+        "timestamp_regex": "^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3})",
         "region": "eu-central-1",
         "imdsv2": true,
         "batch_max_size": 100,
