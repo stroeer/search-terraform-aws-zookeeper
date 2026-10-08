@@ -21,7 +21,6 @@ write_files:
 
       declare -A USERKEY
 
-      USERKEY[mgaber]=""
       USERKEY[ascholz]=""
       USERKEY[cstuemer]=""
       USERKEY[dklug]=""
@@ -29,8 +28,6 @@ write_files:
       USERKEY[ltischendorf]=""
       USERKEY[prieger]=""
       USERKEY[swindisch]=""
-      USERKEY[dgoldhan]=""
-      USERKEY[tbaerwinkel]=""
       USERKEY[jbajaryn]=""
 
       for user in "$${!USERKEY[@]}" ; do
@@ -141,80 +138,28 @@ write_files:
     permissions: 0700
   - content: |
       {
-        "agent": {
-          "metrics_collection_interval": 60,
-          "run_as_user": "cwagent"
-        },
-        "logs": {
-          "logs_collected": {
-            "files": {
-              "collect_list": [
-                {
-                  "file_path": "/zookeeper/logs/zookeeper-zookeeper*",
-                  "log_group_name": "zookeeper.log",
-                  "timestamp_format": "%Y-%m-%d %H:%M:%S,%f"
-                }
-              ]
-            }
-          }
-        },
-        "metrics": {
-          "namespace": "${cloudwatch_namespace}",
-          "append_dimensions": {
-              "InstanceId": "$${aws:InstanceId}",
-              "AutoScalingGroupName": "$${aws:AutoScalingGroupName}"
-          },
-          "metrics_collected": {
-            "cpu": {
-              "measurement": [
-                "time_iowait",
-                "time_user",
-                "time_system",
-                "time_active",
-                "usage_system",
-                "usage_user"
-              ]
-            },
-            "disk": {
-              "measurement": [
-                "used_percent"
-              ],
-              "resources": [
-                "/",
-                "/zookeeper/data",
-                "/zookeeper/logs"
-              ]
-            },
-            "diskio": {
-              "measurement": [
-                "read_bytes",
-                "write_bytes"
-              ]
-            },
-            "mem": {
-              "measurement": [
-                "used_percent"
-              ]
-            },
-            "net": {
-              "measurement": [
-                "bytes_sent",
-                "bytes_recv"
-              ]
-            }
-          }
-        }
+        "log_file": "/zookeeper/logs/zookeeper-zookeeper*",
+        "log_group": "zookeeper.log",
+        "log_stream": "",
+        "timestamp_layout": "Jan 02 15:04:05",
+        "timestamp_regex": "^(\\w{3} \\d{1,2} \\d{2}:\\d{2}:\\d{2})",
+        "region": "eu-central-1",
+        "imdsv2": true,
+        "batch_max_size": 100,
+        "flush_interval_ms": 500,
+        "create_log_group": true,
+        "create_log_stream": true
       }
-    path: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    path: /etc/aws-ec2logshipper/config.json
     permissions: 0755
   - content: |
       #!/bin/bash
-      echo Installing CloudWatch agent
-      wget -O /run/amazon-cloudwatch-agent.rpm https://amazoncloudwatch-agent.s3.amazonaws.com/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
-      rpm -Uvh /run/amazon-cloudwatch-agent.rpm
-      chkconfig amazon-cloudwatch-agent on
-      service amazon-cloudwatch-agent start
-    path: /run/install_cloudwatch_agent.sh
+      echo Installing v${logshipper_version} EC2 Logshipper by ESEMOS
+      wget -O /run/aws-ec2logshipper.rpm https://github.com/esemossearch/aws-ec2logshipper/releases/download/v${logshipper_version}/aws-ec2logshipper-${logshipper_version}-1.x86_64.rpm
+      rpm -Uvh /run/aws-ec2logshipper.rpm
+      chkconfig aws-ec2logshipper on
+      service aws-ec2logshipper start
+    path: /run/install_aws-ec2logshipper.sh
     permissions: 0700
 
   - content: |
@@ -240,7 +185,7 @@ runcmd:
   - /run/create_zk_user.sh
   - /run/setup_volumes.sh
   - /run/install_zookeeper.sh
-  - /run/install_cloudwatch_agent.sh
+  - /run/install_aws-ec2logshipper.sh
   - service zookeeper start
   - /run/install-ssm-agent.sh
   - /run/reboot-required.sh

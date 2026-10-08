@@ -36,6 +36,11 @@ variable "zookeeper_version" {
   default     = "3.8.1"
 }
 
+variable "logshipper_version" {
+  description = "The version of ec2 logshipper to install"
+  default     = "1.0.0"
+}
+
 variable "tags" {
   description = "A map of tags that you want associated with all of the resources created"
   type        = map(any)
