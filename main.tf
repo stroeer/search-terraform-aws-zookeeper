@@ -154,6 +154,7 @@ resource "aws_launch_template" "zookeeper" {
     sync_limit           = var.zookeeper_config["syncLimit"]
     init_limit           = var.zookeeper_config["initLimit"]
     cloudwatch_namespace = var.cloudwatch_namespace
+    logshipper_version   = var.logshipper_version
   }))
 
   block_device_mappings {
